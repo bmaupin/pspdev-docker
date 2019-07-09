@@ -1,42 +1,27 @@
- ====================
-  What does this do?
- ====================
+Docker images with the [pspdev toolchain](https://github.com/pspdev/psptoolchain) prebuilt.
 
-  This program will automatically build a docker image with the pspdev
-  toolchain ready to be used for homebrew development.
+## Usage
 
- ====================
-  How do I build it?
- ====================
+Change to the directory containing the PSP source code you'd like to build and use this command to build it:
 
- Build the image:
+```
+docker run -v "$PWD:/build" bmaupin/pspdev make
+```
 
-   docker build -t pspdev-docker .
+TempGBA4PSP requires an older version of gcc. You can use this command instead:
 
- Copy the helper script:
+```
+docker run -v "$PWD:/build" bmaupin/pspdev:gcc-4.6.4 make
+```
 
-   cp pspdev-docker.sh /usr/local/bin
 
- ==================
-  How do I use it?
- ==================
+## Building these images
 
- Use the helper script to run 'make' on the current directory:
+To build these images locally:
 
-   pspdev-docker.sh make
-
- Or, manually run 'make' on the current directory:
-
-   docker run -v `pwd`:/build pspdev-docker make
-
- ============================
-  How do I save and load it?
- ============================
-
- Save the image:
-
-   docker save pspdev-docker | bzip2 > pspdev-docker.tar.bz2
-
- Load the image:
-
-   docker load < bzip2 -dc pspdev-docker.tar.bz2
+```
+docker build -f gcc-4.6.4/Dockerfile -t pspdev-docker:gcc-4.6.4
+docker build -f latest/Dockerfile -t pspdev-docker:latest
+gcc_version=$(podman run -it --rm pspdev-docker:latest gcc --version | head -n 1 | cut -d " " -f 4 | tr -d '\r\n')
+docker tag pspdev-docker:latest pspdev-docker:gcc-${gcc_version}
+```
