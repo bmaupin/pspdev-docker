@@ -5,13 +5,13 @@ Docker images with the [pspdev toolchain](https://github.com/pspdev/psptoolchain
 Change to the directory containing the PSP source code you'd like to build and use this command to build it:
 
 ```
-docker run -v "$PWD:/build" bmaupin/pspdev make
+docker run --rm -v "$PWD:/build" bmaupin/pspdev make
 ```
 
 TempGBA4PSP requires an older version of gcc. You can use this command instead:
 
 ```
-docker run -v "$PWD:/build" bmaupin/pspdev:gcc-4.6.4 make
+docker run --rm -v "$PWD:/build" bmaupin/pspdev:gcc-4.6.4 make
 ```
 
 
