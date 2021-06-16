@@ -7,7 +7,7 @@ ENV PATH ${PATH}:${PSPDEV}/bin
 
 RUN \
   apt -y update && \
-  apt -y install autoconf bison build-essential cmake doxygen flex git libncurses5-dev libreadline-dev libsdl1.2-dev libtool-bin libusb-dev subversion tcl texinfo unzip wget zlib1g-dev && \
+  apt -y install autoconf bison build-essential cmake doxygen flex git libarchive-dev libcurl4-openssl-dev libgpgme11-dev libncurses5-dev libreadline-dev libsdl1.2-dev libssl-dev libtool-bin libusb-dev python3 subversion tcl texinfo unzip wget zlib1g-dev && \
   apt -y clean autoclean autoremove && \
   rm -rf /var/lib/{apt,dpkg,cache,log}/
 
